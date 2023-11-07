@@ -1,0 +1,38 @@
+<resources>
+    <string name="title">Há Vagas</string>
+    <string name="app_name">HaVagas</string>
+    <string name="full_name">Nome completo</string>
+    <string name="type_your_full_name">Digite seu nome completo</string>
+    <string name="email">Email</string>
+    <string name="type_your_email">Digite seu email</string>
+    <string name="want_to_receive_emails_with_updates">Deseja receber emails com atualizações de vagas?</string>
+    <string name="phone">Telefone</string>
+    <string name="typeYourPhone">Digite seu telefone</string>
+    <string name="cellphone">Celular</string>
+    <string name="typeYourCellphone">Digite seu celular</string>
+    <string name="gender">Sexo</string>
+    <string name="birthDate">Data de nascimento</string>
+    <string name="select_your_birth_date">Selecione sua data de nascimento</string>
+    <string-array name="genderValues">
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Outros</item>
+    </string-array>
+    <string name="formation">Formação</string>
+    <string-array name="formationValues">
+        <item>Ensino fundamental</item>
+        <item>Ensino médio</item>
+        <item>Graduação</item>
+        <item>Especialização</item>
+        <item>Mestrado</item>
+        <item>Doutorado</item>
+    </string-array>
+    <string name="typeYourFormationYear">Digite o ano de formação</string>
+    <string name="formation_year">Ano de formação</string>
+    <string name="interestJobs">Vagas de interesse</string>
+    <string name="typeInterestJobs">Digite vagas de interesse</string>
+    <string name="saveBtn">Salvar</string>
+    <string name="cleanFormBtn">Limpar formulário</string>
+
+
+</resources>

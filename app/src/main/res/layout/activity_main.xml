@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/principalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/title"
+            android:textAlignment="center"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="303dp"
+
+            android:text="@string/full_name"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/principalTitle" />
+
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:width="300dp"
+            android:autofillHints="name"
+
+            android:background="#FFFFFF"
+            android:hint="@string/type_your_full_name"
+            android:inputType="text"
+            android:maxWidth="488dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameTv" />
+
+        <TextView
+            android:id="@+id/emailTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginEnd="303dp"
+            android:text="@string/email"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameEt" />
+
+        <EditText
+            android:id="@+id/emailEt"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:width="300dp"
+            android:autofillHints="email"
+
+            android:background="#FFFFFF"
+            android:hint="@string/type_your_email"
+            android:inputType="textEmailAddress"
+            android:maxWidth="488dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailTv" />
+
+        <CheckBox
+            android:id="@+id/receiveEmailUpdatesCb"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:maxWidth="300dp"
+            android:text="@string/want_to_receive_emails_with_updates"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailEt"
+
+            app:layout_constraintWidth_max="320dp" />
+
+        <TextView
+            android:id="@+id/phoneTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginEnd="303dp"
+            android:text="@string/phone"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/receiveEmailUpdatesCb" />
+
+        <EditText
+            android:id="@+id/phoneEt"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+
+            android:width="300dp"
+            android:autofillHints="phone"
+            android:background="#FFFFFF"
+            android:hint="@string/typeYourPhone"
+            android:inputType="text"
+            android:lineSpacingExtra="4dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneTv" />
+
+        <TextView
+            android:id="@+id/cellphoneTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="303dp"
+            android:text="@string/cellphone"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneEt" />
+
+        <LinearLayout
+            android:id="@+id/cellphoneLl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/cellphoneTv">
+
+            <EditText
+                android:id="@+id/cellphoneEt"
+                android:layout_width="327dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+
+                android:autofillHints="cellphone"
+                android:background="@drawable/edittext_background_disabled"
+                android:enabled="false"
+                android:hint="@string/typeYourCellphone"
+                android:inputType="text"
+                android:lineSpacingExtra="4dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                android:textSize="16sp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="434dp" />
+
+            <CheckBox
+                android:id="@+id/cellphoneCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="320dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/phoneEt2"
+                app:layout_constraintWidth_max="320dp"
+                tools:layout_editor_absoluteY="436dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/genderTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="303dp"
+            android:text="@string/gender"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cellphoneLl" />
+
+        <Spinner
+            android:id="@+id/genderSp"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+
+            android:autofillHints="gender"
+            android:background="#FFFFFF"
+            android:entries="@array/genderValues"
+            android:lineSpacingExtra="4dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genderTv" />
+
+        <TextView
+            android:id="@+id/birthDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginEnd="303dp"
+            android:text="@string/birthDate"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genderSp" />
+
+        <EditText
+            android:id="@+id/birthDateEt"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:width="300dp"
+            android:autofillHints="birthdate"
+            android:background="#FFFFFF"
+            android:focusable="false"
+            android:hint="@string/select_your_birth_date"
+            android:inputType="date"
+            android:maxWidth="488dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/birthDateTv" />
+
+        <TextView
+            android:id="@+id/formationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="303dp"
+            android:text="@string/formation"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/birthDateEt" />
+
+        <Spinner
+            android:id="@+id/formationSp"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+
+            android:autofillHints="gender"
+            android:background="#FFFFFF"
+            android:entries="@array/formationValues"
+            android:lineSpacingExtra="4dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/formationTv" />
+
+        <LinearLayout
+            android:id="@+id/formationLl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+
+            app:layout_constraintTop_toBottomOf="@+id/formationSp">
+
+            <TextView
+                android:id="@+id/formationYearTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+
+                android:layout_marginTop="8dp"
+                android:text="@string/formation_year"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/formationLl" />
+
+            <EditText
+                android:id="@+id/formationYearEt"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+
+                android:width="300dp"
+                android:autofillHints="formationYear"
+                android:background="#FFFFFF"
+                android:hint="@string/typeYourFormationYear"
+                android:inputType="text"
+                android:lineSpacingExtra="4dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/formationYearTv" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/interestJobsTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/interestJobs"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/formationLl" />
+
+        <EditText
+            android:id="@+id/interestJobsEt"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+
+            android:width="300dp"
+            android:autofillHints="interestJobs"
+            android:background="#FFFFFF"
+            android:hint="@string/typeInterestJobs"
+            android:inputType="text"
+            android:lineSpacingExtra="4dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/interestJobsTv" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/interestJobsEt"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#8BC34A"
+                    android:text="@string/saveBtn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/cleanFormBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#F44336"
+                    android:text="@string/cleanFormBtn" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
