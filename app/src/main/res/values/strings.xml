@@ -33,6 +33,14 @@
     <string name="typeInterestJobs">Digite vagas de interesse</string>
     <string name="saveBtn">Salvar</string>
     <string name="cleanFormBtn">Limpar formulário</string>
+    <string name="conclusion_year">Ano de conclusão</string>
+    <string name="typeYourConclusionYear">Digite o ano de conclusão</string>
+    <string name="institution_year">Instituição</string>
+    <string name="typeInstitution">Digite a instituição</string>
+    <string name="monography_title_year">Título da monografia</string>
+    <string name="typeYourMonographyTitle">Digite o título da monografia</string>
+    <string name="advisor_year">Orientador</string>
+    <string name="typeAdvisor">Digite o nome do orientador</string>
 
 
 </resources>

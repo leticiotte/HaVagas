@@ -8,7 +8,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/principalConstraintLayout"
+        >
 
 
         <TextView
@@ -46,11 +48,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
             android:width="300dp"
-            android:autofillHints="name"
+            android:autofillHints="full name"
 
             android:background="#FFFFFF"
             android:hint="@string/type_your_full_name"
-            android:inputType="text"
+            android:inputType="textPersonName"
             android:maxWidth="488dp"
             android:textColor="#000000"
             android:textColorHint="#000000"
@@ -82,7 +84,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
             android:width="300dp"
-            android:autofillHints="email"
+            android:autofillHints="email address"
 
             android:background="#FFFFFF"
             android:hint="@string/type_your_email"
@@ -98,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@+id/emailTv" />
 
         <CheckBox
-            android:id="@+id/receiveEmailUpdatesCb"
+            android:id="@+id/receiveEmailsCb"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
 
@@ -126,7 +128,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/receiveEmailUpdatesCb" />
+            app:layout_constraintTop_toBottomOf="@+id/receiveEmailsCb" />
 
         <EditText
             android:id="@+id/phoneEt"
@@ -139,7 +141,7 @@
             android:autofillHints="phone"
             android:background="#FFFFFF"
             android:hint="@string/typeYourPhone"
-            android:inputType="text"
+            android:inputType="number"
             android:lineSpacingExtra="4dp"
             android:textColor="#000000"
             android:textColorHint="#000000"
@@ -182,7 +184,7 @@
                 android:background="@drawable/edittext_background_disabled"
                 android:enabled="false"
                 android:hint="@string/typeYourCellphone"
-                android:inputType="text"
+                android:inputType="number"
                 android:lineSpacingExtra="4dp"
                 android:textColor="#000000"
                 android:textColorHint="#000000"
@@ -279,7 +281,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
 
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="303dp"
             android:text="@string/formation"
             android:textColor="#000000"
@@ -295,7 +297,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
 
-            android:autofillHints="gender"
+            android:autofillHints="formation"
             android:background="#FFFFFF"
             android:entries="@array/formationValues"
             android:lineSpacingExtra="4dp"
@@ -310,49 +312,300 @@
         <LinearLayout
             android:id="@+id/formationLl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
 
             app:layout_constraintTop_toBottomOf="@+id/formationSp">
 
-            <TextView
-                android:id="@+id/formationYearTv"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/formationFirstOptionLl"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
+                android:orientation="vertical">
 
-                android:layout_marginTop="8dp"
-                android:text="@string/formation_year"
-                android:textColor="#000000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/formationLl" />
+                <TextView
+                    android:id="@+id/formationYearTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
 
-            <EditText
-                android:id="@+id/formationYearEt"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/formation_year"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationLl" />
 
-                android:width="300dp"
-                android:autofillHints="formationYear"
-                android:background="#FFFFFF"
-                android:hint="@string/typeYourFormationYear"
-                android:inputType="text"
-                android:lineSpacingExtra="4dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/formationYearTv" />
+                <EditText
+                    android:id="@+id/formationYearEt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:width="300dp"
+                    android:autofillHints="formation year"
+                    android:background="#FFFFFF"
+                    android:hint="@string/typeYourFormationYear"
+                    android:inputType="numberDecimal"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationYearTv"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/formationSecondOptionLl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:visibility="gone">
+
+                <TextView
+                    android:id="@+id/conclusionYearTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="8dp"
+                    android:text="@string/conclusion_year"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationSecondOptionLl" />
+
+                <EditText
+                    android:id="@+id/conclusionYearEt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:width="300dp"
+                    android:autofillHints="formation conclusion year"
+                    android:background="#FFFFFF"
+                    android:hint="@string/typeYourConclusionYear"
+                    android:inputType="numberDecimal"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationSecondOptionLl"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/institutionTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="8dp"
+                    android:text="@string/institution_year"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationSecondOptionLl" />
+
+                <EditText
+                    android:id="@+id/institutionEt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:width="300dp"
+                    android:autofillHints="formation institution"
+                    android:background="#FFFFFF"
+                    android:hint="@string/typeInstitution"
+                    android:inputType="text"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationSecondOptionLl"
+                    tools:visibility="visible" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/formationThirdOptionLl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:visibility="gone">
+
+                <TextView
+                    android:id="@+id/conclusionYearTv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="8dp"
+                    android:text="@string/conclusion_year"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl" />
+
+                <EditText
+                    android:id="@+id/conclusionYearEt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:width="300dp"
+                    android:autofillHints="formation conclusion year"
+                    android:background="#FFFFFF"
+                    android:hint="@string/typeYourConclusionYear"
+                    android:inputType="numberDecimal"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/institutionTv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="8dp"
+                    android:text="@string/institution_year"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl" />
+
+                <EditText
+                    android:id="@+id/institutionEt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:width="300dp"
+                    android:autofillHints="formation institution"
+                    android:background="#FFFFFF"
+                    android:hint="@string/typeInstitution"
+                    android:inputType="text"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/monographyTitleTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="8dp"
+                    android:text="@string/monography_title_year"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl" />
+
+                <EditText
+                    android:id="@+id/monographyTitleEt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:width="300dp"
+                    android:autofillHints="formation monography title"
+                    android:background="#FFFFFF"
+                    android:hint="@string/typeYourMonographyTitle"
+                    android:inputType="text"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/advisorTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="8dp"
+                    android:text="@string/advisor_year"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl" />
+
+                <EditText
+                    android:id="@+id/advisorEt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:width="300dp"
+                    android:autofillHints="formation advisor"
+                    android:background="#FFFFFF"
+                    android:hint="@string/typeAdvisor"
+                    android:inputType="textPersonName"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/formationThirdOptionLl"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/interestJobsTv"
@@ -369,7 +622,8 @@
         <EditText
             android:id="@+id/interestJobsEt"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
 
@@ -377,7 +631,7 @@
             android:autofillHints="interestJobs"
             android:background="#FFFFFF"
             android:hint="@string/typeInterestJobs"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:lineSpacingExtra="4dp"
             android:textColor="#000000"
             android:textColorHint="#000000"
@@ -389,18 +643,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/interestJobsEt"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/interestJobsEt">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/saveBtn"
@@ -414,19 +667,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/cleanFormBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:backgroundTint="#F44336"
                     android:text="@string/cleanFormBtn" />
             </LinearLayout>
-
-
 
 
         </LinearLayout>
