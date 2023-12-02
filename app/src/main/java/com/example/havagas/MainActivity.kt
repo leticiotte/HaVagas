@@ -1,7 +1,10 @@
 package com.example.havagas
 
 import android.app.DatePickerDialog
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -14,10 +17,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import com.example.havagas.databinding.ActivityMainBinding
 import com.example.havagas.domain.models.Form
+import com.example.havagas.domain.models.enums.FormationEnum
+import com.example.havagas.domain.models.enums.GenderEnum
+import com.example.havagas.shared.utils.MockUtils
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -48,11 +55,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var interestJobsEt: EditText
     private lateinit var cleanFormBtn: Button
     private lateinit var saveBtn: Button
+    private lateinit var drawableEnabled: Drawable
+    private lateinit var drawableDisabled: Drawable
+
+    private var form: Form? = null
+    val mockUtils = MockUtils(this)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         amb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(amb.root)
+
+        drawableEnabled = ContextCompat.getDrawable(this, R.drawable.edittext_background_enabled)!!
+        drawableDisabled =
+            ContextCompat.getDrawable(this, R.drawable.edittext_background_disabled)!!
+
 
         linkVariablesWithComponents()
         setupCellphoneCb()
@@ -62,19 +80,169 @@ class MainActivity : AppCompatActivity() {
         setupCleanFormBtnOnClickListener()
     }
 
-    private fun setupCellphoneCb() {
-        val drawableEnabled =
-            ContextCompat.getDrawable(this, R.drawable.edittext_background_enabled)
-        val drawableDisabled =
-            ContextCompat.getDrawable(this, R.drawable.edittext_background_disabled)
+    override fun onStart() {
+        super.onStart()
 
+        val formRestored: Form? = restoreFormDataFromOnSharedPreferences()
+        if (formRestored != null) {
+            form = formRestored;
+            fillFormWithRestoredData();
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        saveFormDataFromOnSharedPreferences()
+    }
+
+    private fun saveFormDataFromOnSharedPreferences() {
+        val sharedPreferences = getSharedPreferences("HaVagas", Context.MODE_PRIVATE)
+        if (form == null) return
+        val editor = sharedPreferences.edit()
+
+        val gson = Gson()
+        val formJson = gson.toJson(form)
+
+        editor.putString("form", formJson)
+        editor.apply()
+    }
+
+    private fun restoreFormDataFromOnSharedPreferences(): Form? {
+        val sharedPreferences = getSharedPreferences("HaVagas", Context.MODE_PRIVATE)
+
+        val formJson = sharedPreferences.getString("form", "")
+        if (formJson.isNullOrEmpty()) return null
+
+        val gson = Gson()
+        val formType = object : TypeToken<Form>() {}.type
+        return gson.fromJson<Form>(formJson, formType) ?: Form()
+    }
+
+    private fun fillFormWithRestoredData() {
+        nameEt.text = Editable.Factory.getInstance().newEditable(form?.name ?: "")
+        emailEt.text = Editable.Factory.getInstance().newEditable(form?.email ?: "")
+        receiveEmailsCb.isChecked = form?.receiveEmails ?: false
+        phoneEt.text = Editable.Factory.getInstance().newEditable(form?.phone ?: "")
+        fillCellphoneWithRestoredData()
+        fillGenderWithRestoredData()
+        fillBirthDateWithRestoredData()
+        fillFormationWithRestoredData()
+        interestJobsEt.text = Editable.Factory.getInstance().newEditable(form?.interestJobs ?: "")
+    }
+
+    private fun fillCellphoneWithRestoredData() {
+        if (form?.hasCellphone == true) {
+            cellphoneCb.isChecked = true
+
+            cellphoneEt.isEnabled = true
+            cellphoneEt.background = drawableEnabled
+            cellphoneEt.text = Editable.Factory.getInstance().newEditable(form?.cellphone ?: "")
+        }
+    }
+
+    private fun fillGenderWithRestoredData() {
+        if (form?.gender.isNullOrEmpty()) return
+        when (form?.gender) {
+            GenderEnum.Feminino.toString() -> {
+                genderSp.setSelection(0)
+            }
+
+            GenderEnum.Masculino.toString() -> {
+                genderSp.setSelection(1)
+            }
+
+            else -> {
+                genderSp.setSelection(2)
+            }
+        }
+    }
+
+    private fun fillBirthDateWithRestoredData() {
+        if (form?.birthDate.isNullOrEmpty()) return
+
+        birthDateEt.setText(form?.birthDate)
+    }
+
+    private fun fillFormationWithRestoredData() {
+        if (form?.formation?.formationType.isNullOrEmpty()) return
+        when (form?.formation?.formationType) {
+            FormationEnum.ENSINO_FUNDAMENTAL.stringValue -> {
+                formationSp.setSelection(0)
+                fillFormationFirstOption()
+            }
+
+            FormationEnum.ENSINO_MEDIO.stringValue -> {
+                formationSp.setSelection(1)
+                fillFormationFirstOption()
+            }
+
+            FormationEnum.GRADUACAO.stringValue -> {
+                formationSp.setSelection(2)
+                fillFormationSecondOption()
+            }
+
+            FormationEnum.ESPECIALIZACAO.stringValue -> {
+                formationSp.setSelection(3)
+                fillFormationSecondOption()
+            }
+
+            FormationEnum.MESTRADO.stringValue -> {
+                formationSp.setSelection(4)
+                fillFormationThirdOption()
+            }
+
+            FormationEnum.DOUTORADO.stringValue -> {
+                formationSp.setSelection(5)
+                fillFormationThirdOption()
+            }
+        }
+    }
+
+    private fun fillFormationFirstOption() {
+        formationYearEt.text =
+            Editable.Factory.getInstance().newEditable(form?.formation?.formationYear ?: "")
+        formationFirstOptionLl.visibility = View.VISIBLE
+        formationSecondOptionLl.visibility = View.GONE
+        formationThirdOptionLl.visibility = View.GONE
+    }
+
+    private fun fillFormationSecondOption() {
+        conclusionYearEt.text =
+            Editable.Factory.getInstance().newEditable(form?.formation?.conclusionYear ?: "")
+        institutionEt.text =
+            Editable.Factory.getInstance().newEditable(form?.formation?.institution ?: "")
+        formationFirstOptionLl.visibility = View.GONE
+        formationSecondOptionLl.visibility = View.VISIBLE
+        formationThirdOptionLl.visibility = View.GONE
+    }
+
+    private fun fillFormationThirdOption() {
+        conclusionYearEt2.text =
+            Editable.Factory.getInstance().newEditable(form?.formation?.conclusionYear ?: "")
+        institutionEt2.text =
+            Editable.Factory.getInstance().newEditable(form?.formation?.institution ?: "")
+        monographyTitleEt.text =
+            Editable.Factory.getInstance().newEditable(form?.formation?.monographyTitle ?: "")
+        advisorEt.text = Editable.Factory.getInstance().newEditable(form?.formation?.advisor ?: "")
+        formationFirstOptionLl.visibility = View.GONE
+        formationSecondOptionLl.visibility = View.GONE
+        formationThirdOptionLl.visibility = View.VISIBLE
+    }
+
+    private fun clearFormDataFromOnSharedPreferences() {
+        val sharedPreferences = getSharedPreferences("HaVagas", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("form")
+        editor.apply()
+    }
+
+    private fun setupCellphoneCb() {
         cellphoneCb.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                println("Enabled")
                 cellphoneEt.isEnabled = true
                 cellphoneEt.background = drawableEnabled
             } else {
-                println("Disabled")
                 cellphoneEt.isEnabled = false
                 cellphoneEt.background = drawableDisabled
             }
@@ -85,12 +253,12 @@ class MainActivity : AppCompatActivity() {
     private fun setupBirthDatePicker() {
         val calendar = Calendar.getInstance()
 
-        // configura o EditText com a data atual
+        // SETS UP THE EDITTEXT WITH THE CURRENT DATE
         val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val currentDate = simpleDateFormat.format(calendar.time)
         birthDateEt.setText(currentDate)
 
-        // configurar o DatePickerDialog
+        // SETS UP THE DATEPICKERDIALOG
         birthDateEt.setOnClickListener {
             val datePickerDialog = DatePickerDialog(
                 this,
@@ -140,7 +308,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+                // NO IMPLEMENTATION NEEDED
             }
         }
     }
@@ -148,6 +316,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupCleanFormBtnOnClickListener() {
         cleanFormBtn.setOnClickListener {
             cleanForms(principalConstraintLayout)
+            form = null
+            clearFormDataFromOnSharedPreferences()
         }
     }
 
@@ -163,58 +333,74 @@ class MainActivity : AppCompatActivity() {
             } else if (child is Spinner) {
                 child.setSelection(0)
             } else if (child is CheckBox) {
-                child.isSelected = false
+                child.isChecked = false
             } else if (child is ViewGroup) {
                 cleanForms(child)
             }
         }
+
+        //DISABLE CELLPHONE FIELD
+        cellphoneEt.isEnabled = false
+        cellphoneEt.background = drawableDisabled
     }
 
     private fun setupSaveBtnOnClickListener() {
         saveBtn.setOnClickListener {
+//           TO USE MOCKS INSTEAD OF FILLING IN THE FIELDS
+//            form = createMockForm()
+//            return@setOnClickListener
+
             if (!isInputsValid(principalConstraintLayout)) {
                 Snackbar.make(it, "Preencha todos os campos", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val title = "Dados salvos!"
-            var form: Form = getData()
+            form = getData()
             showPopup(title, form.toString())
+            form = null
+            clearFormDataFromOnSharedPreferences()
         }
     }
 
+    fun createMockForm(): Form? {
+        val formType = object : TypeToken<Form>() {}.type
+
+        return mockUtils.getMockFromAsset("form-mocks.json", formType)
+    }
+
     private fun getData(): Form {
-        var form = Form()
-        form.name = nameEt.text.toString()
-        form.email = emailEt.text.toString()
-        form.receiveEmails = receiveEmailsCb.isChecked
-        form.phone = phoneEt.text.toString()
-        form.cellphone = cellphoneEt.text.toString()
-        form.hasCellphone = cellphoneCb.isChecked
-        form.gender = genderSp.selectedItem.toString()
-        form.birthDate = birthDateEt.text.toString()
+        if (form == null) form = Form()
+        form!!.name = nameEt.text.toString()
+        form!!.email = emailEt.text.toString()
+        form!!.receiveEmails = receiveEmailsCb.isChecked
+        form!!.phone = phoneEt.text.toString()
+        form!!.cellphone = cellphoneEt.text.toString()
+        form!!.hasCellphone = cellphoneCb.isChecked
+        form!!.gender = genderSp.selectedItem.toString()
+        form!!.birthDate = birthDateEt.text.toString()
         var formationSelected = formationSp.selectedItemPosition
 
-        form.formation.formationType = formationSp.selectedItem.toString()
+        form!!.formation.formationType = formationSp.selectedItem.toString()
         when (formationSelected) {
             0, 1 -> {
-                form.formation.formationYear = formationYearEt.text.toString()
+                form!!.formation.formationYear = formationYearEt.text.toString()
             }
 
             2, 3 -> {
-                form.formation.conclusionYear = conclusionYearEt.text.toString()
-                form.formation.institution = institutionEt.text.toString()
+                form!!.formation.conclusionYear = conclusionYearEt.text.toString()
+                form!!.formation.institution = institutionEt.text.toString()
             }
 
             4, 5 -> {
-                form.formation.conclusionYear = conclusionYearEt2.text.toString()
-                form.formation.institution = institutionEt2.text.toString()
-                form.formation.monographyTitle = monographyTitleEt.text.toString()
-                form.formation.advisor = advisorEt.text.toString()
+                form!!.formation.conclusionYear = conclusionYearEt2.text.toString()
+                form!!.formation.institution = institutionEt2.text.toString()
+                form!!.formation.monographyTitle = monographyTitleEt.text.toString()
+                form!!.formation.advisor = advisorEt.text.toString()
             }
         }
-        form.interestJobs = interestJobsEt.text.toString()
+        form!!.interestJobs = interestJobsEt.text.toString()
 
-        return form
+        return form as Form
     }
 
     private fun linkVariablesWithComponents() {
@@ -243,7 +429,6 @@ class MainActivity : AppCompatActivity() {
         saveBtn = amb.saveBtn
     }
 
-    //TODO implementar corretamente
     private fun isInputsValid(viewGroup: ViewGroup): Boolean {
         for (i in 0 until viewGroup.childCount) {
             val child = viewGroup.getChildAt(i)
@@ -256,8 +441,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if(!isCellphoneInputValid()) return false
-        if(!isFormationInputsValid()) return false
+        if (!isCellphoneInputValid()) return false
+        if (!isFormationInputsValid()) return false
         return true
     }
 

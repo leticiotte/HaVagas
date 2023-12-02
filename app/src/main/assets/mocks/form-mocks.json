@@ -1,0 +1,19 @@
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "receiveEmails": true,
+  "phone": "123456789",
+  "cellphone": "987654321",
+  "hasCellphone": true,
+  "gender": "Masculino",
+  "birthDate": "14/03/2002",
+  "formation": {
+    "formationType": "Doutorado",
+    "formationYear": "2010",
+    "conclusionYear": "2014",
+    "institution": "University XYZ",
+    "monographyTitle": "A Study on Software Engineering",
+    "advisor": "Dr. Jane Smith"
+  },
+  "interestJobs": "Software Developer"
+}
