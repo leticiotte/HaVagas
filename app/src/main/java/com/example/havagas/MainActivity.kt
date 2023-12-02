@@ -363,9 +363,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun createMockForm(): Form? {
-        val formType = object : TypeToken<Form>() {}.type
-
-        return mockUtils.getMockFromAsset("form-mocks.json", formType)
+        return mockUtils.getMockFromAsset("form-mocks.json", Form::class.java)
     }
 
     private fun getData(): Form {

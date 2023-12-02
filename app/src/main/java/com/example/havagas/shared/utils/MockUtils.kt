@@ -8,7 +8,7 @@ import java.lang.reflect.Type
 
 class MockUtils(private val context: Context) {
 
-    fun <T> getMockFromAsset(fileName: String, type: Type): T? {
+    fun <T> getMockFromAsset(fileName: String, type: Class<T>): T? {
         val json: String? = loadJsonFromAsset("mocks/$fileName")
         return if (json != null) {
             Gson().fromJson(json, type)
